@@ -1,0 +1,8 @@
+DB_NAME=db1
+DB_USER=admin
+DB_PASS=admin
+DB_HOST=localhost
+JWT_SECERT=secret
+
+PORT=7777
+NODE_ENV=production
