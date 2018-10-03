@@ -62,6 +62,19 @@ exports.ensureAuthenticated = function(req, res, next) {
 
 /**
  * POST /signup
+ * 
+ * sample reply
+ * {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJteS5kb21haW4uY29tIiwic3ViIjoxLCJpYXQiOjE1Mzg1NzY5ODUsImV4cCI6MTUzOTE4MTc4NX0.Smt2QNf1y_hcdTBpt_ofnKfxXT5OFTcmWsNZr1kZJtI",
+    "user": {
+        "name": "Ace Besmonte",
+        "email": "ace@gmail.com",
+        "updated_at": "2018-10-03T14:29:45.574Z",
+        "created_at": "2018-10-03T14:29:45.574Z",
+        "id": 1,
+        "gravatar": "https://gravatar.com/avatar/95c9b5e0cbb5a3b7946a09b1d688babd?s=200&d=retro"
+    }
+ * }
  */
 exports.signupPost = function(req, res, next) {
   req.assert('name', 'Name cannot be blank').notEmpty();
