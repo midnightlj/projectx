@@ -204,8 +204,8 @@ exports.forgotPost = function(req, res, next) {
           if (!user) {
         return res.status(400).send({ msg: 'The email address ' + req.body.email + ' is not associated with any account.' });
           }
-          user.set('passwordResetToken', token);
-          user.set('passwordResetExpires', new Date(Date.now() + 3600000)); // expire in 1 hour
+          user.set('password_reset_token', token);
+          user.set('password_reset_expires', new Date(Date.now() + 3600000)); // expire in 1 hour
           user.save(user.changed, { patch: true }).then(function() {
             done(null, token, user.toJSON());
           });
@@ -251,16 +251,16 @@ exports.resetPost = function(req, res, next) {
 
   async.waterfall([
     function(done) {
-      new User({ passwordResetToken: req.params.token })
-        .where('passwordResetExpires', '>', new Date())
+      new User({ password_reset_token: req.params.token })
+        .where('password_reset_expires', '>', new Date())
         .fetch()
         .then(function(user) {
           if (!user) {
           return res.status(400).send({ msg: 'Password reset token is invalid or has expired.' });
           }
           user.set('password', req.body.password);
-          user.set('passwordResetToken', null);
-          user.set('passwordResetExpires', null);
+          user.set('password_reset_token', null);
+          user.set('password_reset_expires', null);
           user.save(user.changed, { patch: true }).then(function() {
           done(err, user.toJSON());
           });
