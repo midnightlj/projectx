@@ -17,7 +17,7 @@ dotenv.load();
 var User = require('./models/User');
 
 // Controllers
-var homeController = require('./controllers/home');
+var dashboardController = require('./controllers/dashboard');
 var userController = require('./controllers/user');
 var contactController = require('./controllers/contact');
 
@@ -34,8 +34,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'client/dist')));
 
 app.use(function(req, res, next) {
   req.isAuthenticated = function() {
@@ -60,6 +58,8 @@ app.use(function(req, res, next) {
   }
 });
 
+app.get('/dashboard', dashboardController.getHome);
+
 app.post('/contact', contactController.contactPost);
 app.put('/account', userController.ensureAuthenticated, userController.accountPut);
 app.delete('/account', userController.ensureAuthenticated, userController.accountDelete);
@@ -79,8 +79,7 @@ app.get('/auth/google/callback', userController.authGoogleCallback);
 
 app.get('/', function(req, res) {
   // if not logged in
-  console.log("not logged in")
-  res.sendFile(path.join(__dirname, 'views', 'index.html'));
+  res.sendFile(path.join(__dirname, 'client/dist/home', 'index.html'));
 
   // if logged in
   // res.sendFile(path.join(__dirname, 'client/dist', 'index.html'));
@@ -89,6 +88,9 @@ app.get('/', function(req, res) {
 // app.get('*', function(req, res) {
 //   res.redirect('/#' + req.originalUrl);
 // });
+
+
+app.use(express.static(path.join(__dirname, 'client/dist')));
 
 // Production error handler
 if (app.get('env') === 'production') {
