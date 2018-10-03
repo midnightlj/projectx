@@ -68,21 +68,22 @@ app.post('/login', userController.loginPost);
 app.post('/forgot', userController.forgotPost);
 app.post('/reset/:token', userController.resetPost);
 app.get('/unlink/:provider', userController.ensureAuthenticated, userController.unlink);
-app.post('/auth/facebook', userController.authFacebook);
-app.get('/auth/facebook/callback', userController.authFacebookCallback);
+// app.post('/auth/facebook', userController.authFacebook);
+// app.get('/auth/facebook/callback', userController.authFacebookCallback);
 app.post('/auth/google', userController.authGoogle);
 app.get('/auth/google/callback', userController.authGoogleCallback);
-app.post('/auth/twitter', userController.authTwitter);
-app.get('/auth/twitter/callback', userController.authTwitterCallback);
-app.post('/auth/github', userController.authGithub);
-app.get('/auth/github/callback', userController.authGithubCallback);
+// app.post('/auth/twitter', userController.authTwitter);
+// app.get('/auth/twitter/callback', userController.authTwitterCallback);
+// app.post('/auth/github', userController.authGithub);
+// app.get('/auth/github/callback', userController.authGithubCallback);
 
 app.get('/', function(req, res) {
   // if not logged in
+  console.log("not logged in")
   res.sendFile(path.join(__dirname, 'views', 'index.html'));
 
   // if logged in
-  res.sendFile(path.join(__dirname, 'client/dist', 'index.html'));
+  // res.sendFile(path.join(__dirname, 'client/dist', 'index.html'));
 });
 
 // app.get('*', function(req, res) {
