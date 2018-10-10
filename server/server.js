@@ -59,6 +59,7 @@ app.use(function(req, res, next) {
 });
 
 app.get('/dashboard', dashboardController.getHome);
+app.get('/theme', dashboardController.getTheme);
 
 app.post('/contact', contactController.contactPost);
 app.put('/account', userController.ensureAuthenticated, userController.accountPut);
