@@ -1,0 +1,13 @@
+name: projectx
+version: 0.1.0
+
+authors:
+  - your-name-here <your-email-here>
+
+targets:
+  projectx:
+    main: src/projectx.cr
+
+crystal: 1.7.3
+
+license: MIT
