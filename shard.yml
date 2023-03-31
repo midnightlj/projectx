@@ -2,12 +2,25 @@ name: projectx
 version: 0.1.0
 
 authors:
-  - your-name-here <your-email-here>
-
-targets:
-  projectx:
-    main: src/projectx.cr
+  - madapaka
 
 crystal: 1.7.3
 
 license: MIT
+
+dependencies:
+  action-controller:
+    github: spider-gazelle/action-controller
+    version: ~> 5.6
+
+development_dependencies:
+  ameba:
+    github: crystal-ameba/ameba
+    version: ~> 1.4.0
+  hot_topic:
+    github: jgaskins/hot_topic
+
+# compile target
+targets:
+  app:
+    main: src/app.cr

@@ -1,27 +1,52 @@
 # projectx
 
-TODO: Write a description here
+based on spider-gazelle framework
 
-## Installation
+[![CI](https://github.com/spider-gazelle/spider-gazelle/actions/workflows/ci.yml/badge.svg)](https://github.com/spider-gazelle/spider-gazelle/actions/workflows/ci.yml)
 
-TODO: Write installation instructions here
+## Documentation
 
-## Usage
+Detailed documentation and guides available: https://spider-gazelle.net/
 
-TODO: Write usage instructions here
+* [Action Controller](https://github.com/spider-gazelle/action-controller) base class for building [Controllers](http://guides.rubyonrails.org/action_controller_overview.html)
+* [Active Model](https://github.com/spider-gazelle/active-model) base class for building [ORMs](https://en.wikipedia.org/wiki/Object-relational_mapping)
+* [Habitat](https://github.com/luckyframework/habitat) configuration and settings for Crystal projects
+* [router.cr](https://github.com/tbrand/router.cr) base request handling
+* [Radix](https://github.com/luislavena/radix) Radix Tree implementation for request routing
+* [HTTP::Server](https://crystal-lang.org/api/latest/HTTP/Server.html) built-in Crystal Lang HTTP server
+  * Request
+  * Response
+  * Cookies
+  * Headers
+  * Params etc
 
-## Development
 
-TODO: Write development instructions here
+Spider-Gazelle builds on the amazing performance of **router.cr** [here](https://github.com/tbrand/which_is_the_fastest).:rocket:
 
-## Contributing
 
-1. Fork it (<https://github.com/your-github-user/projectx/fork>)
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+## Testing
 
-## Contributors
+`crystal spec`
 
-- [your-name-here](https://github.com/your-github-user) - creator and maintainer
+* to run in development mode `crystal ./src/app.cr`
+
+## Compiling
+
+
+
+# caveat : running in debian might need to install the missing lib
+sudo apt-get update
+sudo apt-get install libyaml-dev
+sudo apt-get install libgmp-dev
+
+
+
+`crystal build ./src/app.cr`
+
+### Deploying
+
+Once compiled you are left with a binary `./app`
+
+* for help `./app --help`
+* viewing routes `./app --routes`
+* run on a different port or host `./app -b 0.0.0.0 -p 80`
