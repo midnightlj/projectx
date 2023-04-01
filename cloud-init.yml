@@ -1,0 +1,38 @@
+# ace @a23excla
+# lester @l23excla
+
+#cloud-config
+runcmd:
+  - apt-get update
+  - ufw allow 5432/tcp
+  - apt-get install -y postgresql
+  - sudo -u postgres psql -c "CREATE DATABASE db1;"
+  - sudo -u postgres psql -c "CREATE DATABASE db2;"
+  - sudo -u postgres psql -c "CREATE DATABASE db3;"
+  - sudo -u postgres psql -c "CREATE USER admin WITH PASSWORD '@@@';"
+  - sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE db1 TO admin;"
+  - sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE db2 TO admin;"
+  - sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE db3 TO admin;"
+
+
+
+
+  #cloud-config 
+package_upgrade: true
+packages:
+  - postgresql-13
+runcmd:
+  # Set the default password for the PostgreSQL "postgres" user to "pororoot"
+  - echo "ALTER USER postgres WITH PASSWORD '@@@';" | sudo -u postgres psql
+  # Modify the PostgreSQL configuration to allow remote connections
+  - sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /etc/postgresql/13/main/postgresql.conf
+  - echo "host    all             all             0.0.0.0/0               md5" | sudo tee -a /etc/postgresql/13/main/pg_hba.conf > /dev/null
+  # Restart the PostgreSQL server
+  - sudo systemctl restart postgresql.service
+  # Create the "db1", "db2", and "db3" databases and grant all privileges to the "postgres" user
+  - sudo -u postgres psql -c "CREATE DATABASE db1;"
+  - sudo -u postgres psql -c "CREATE DATABASE db2;"
+  - sudo -u postgres psql -c "CREATE DATABASE db3;"
+  - sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE db1 TO postgres;"
+  - sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE db2 TO postgres;"
+  - sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE db3 TO postgres;"

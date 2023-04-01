@@ -5,7 +5,7 @@ require "./constants"
 # Application code
 require "./controllers/application"
 require "./controllers/*"
-require "./models/*"
+# require "./models/*"
 
 # Server required after application controllers
 require "action-controller/server"
